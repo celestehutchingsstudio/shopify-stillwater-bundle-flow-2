@@ -22,9 +22,13 @@
   --a-green-bg:#cdfed4; --a-green:#014b40; --a-info-bg:#e0f0ff; --a-info:#00527c; --a-btn:#303030;
   --a-shadow:0 4px 8px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.16);
   /* prototype shell */
-  --shell:#e4ddd2;
+  --shell:#e4ddd2; --shell-fg:#141414; --shell-muted:#5c544b; --shell-line:#cfc3b3; --shell-field:#f6f2ec; --shell-on:#fff;
   color-scheme:light;
 }
+/* Dark mode changes only the prototype shell (control bar and backdrop). Shopify's theme editor
+   and the Stillwater storefront have no dark mode, so they stay light, the same as in Flow 1. */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--shell:#1b1916;--shell-fg:#ede7de;--shell-muted:#a69d92;--shell-line:#3a3631;--shell-field:#24211d;--shell-on:#141414;color-scheme:dark}}
+:root[data-theme="dark"]{--shell:#1b1916;--shell-fg:#ede7de;--shell-muted:#a69d92;--shell-line:#3a3631;--shell-field:#24211d;--shell-on:#141414;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--shell);color:var(--a-text);font-family:var(--ui);font-size:13px;line-height:20px;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow:hidden}
@@ -39,13 +43,13 @@ img{display:block;max-width:100%}
 
 /* ---------- prototype controls (same bar as Flow 1) ---------- */
 .ctl{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:10px;padding-top:calc(10px + env(safe-area-inset-top,0px));
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--shell);color:var(--ink);border-bottom:1px solid var(--line);z-index:80;font-size:14px}
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--shell);color:var(--shell-fg);border-bottom:1px solid var(--shell-line);z-index:80;font-size:14px}
 .ctl-name{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-.ctl-name span{color:var(--muted);font-weight:500}
-.seg{display:inline-flex;border:1px solid var(--ink)}
+.ctl-name span{color:var(--shell-muted);font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--shell-fg)}
 .seg button{padding:6px 12px;font-size:12px;font-weight:500;min-height:32px}
-.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
-.ctl select{background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:6px 8px;font-size:12px;min-height:32px;max-width:100%}
+.seg button[aria-pressed="true"]{background:var(--shell-fg);color:var(--shell-on)}
+.ctl select{background:var(--shell-field);color:var(--shell-fg);border:1px solid var(--shell-fg);border-radius:0;padding:6px 8px;font-size:12px;min-height:32px;max-width:100%}
 .ctl .ghost{font-size:12px;font-weight:500;text-decoration:underline;text-underline-offset:3px;min-height:32px;padding:0 4px}
 .ctl .spacer{flex:1}
 @media (max-width:560px){.ctl-name span{display:none}.ctl .spacer{display:none}}
@@ -94,16 +98,16 @@ body.phone .homebar{display:block;position:absolute;bottom:8px;left:50%;transfor
 .topbar{flex:none;height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 12px 0 0;background:var(--a-surface);border-bottom:1px solid var(--a-border);gap:12px}
 .topbar .l,.topbar .r{display:flex;align-items:center;gap:4px}
 .topbar .l{height:100%;gap:2px}
-.topbar .exit{display:flex;align-items:center;justify-content:center;width:56px;height:100%;border-right:1px solid var(--a-border);margin-right:10px}
+.topbar .exit{display:flex;align-items:center;justify-content:center;width:56px;height:100%;border-right:1px solid var(--a-border);margin-right:8px}
 .topbar .r{justify-content:flex-end;gap:6px}
 .topbar .ib{width:36px;height:36px}
 .topbar .ib.sel{color:var(--a-sel)}
 .topbar .ib.on{background:var(--a-subtle)}
 .topbar .mid{display:flex;align-items:center;gap:32px;position:relative}
-.theme{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:450;white-space:nowrap}
+.theme{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:450;white-space:nowrap}
 .theme .badge{font-size:13px;line-height:18px;padding:3px 10px;font-weight:500}
 .badge.nodot::before{display:none}
-.pagesel{display:inline-flex;align-items:center;gap:10px;padding:6px 8px;border-radius:8px;font-size:14px;font-weight:450;white-space:nowrap}
+.pagesel{display:inline-flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;font-size:14px;font-weight:450;white-space:nowrap}
 .pagesel:hover,.pagesel[aria-expanded="true"]{background:var(--a-subtle)}
 .undogrp{display:inline-flex;border-radius:10px;background:#fafafa;box-shadow:inset 0 0 0 1px #ececec}
 .undogrp .ib{width:34px}
@@ -124,8 +128,8 @@ body.phone .homebar{display:block;position:absolute;bottom:8px;left:50%;transfor
 .row:hover{background:var(--a-subtle)}
 .row .lbl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .lbl i{color:var(--a-text2)}
-.row.dim{color:var(--a-dis)}
-.row.dim .lbl i{color:var(--a-dis)}
+.row.dim{color:#707070}
+.row.dim .lbl i{color:#707070}
 .row.add{color:var(--a-link)}
 .row.add.on{background:var(--a-subtle);font-weight:600}
 .row .chev{color:var(--a-text)}
@@ -167,11 +171,11 @@ body.phone .homebar{display:block;position:absolute;bottom:8px;left:50%;transfor
 .hrow .lab{padding-top:4px;color:var(--a-text)}
 .imgpick{position:relative;display:block;width:100%;aspect-ratio:16/9.5;border-radius:10px;overflow:hidden;background:var(--a-subtle);text-align:left}
 .imgpick img{width:100%;height:100%;object-fit:cover}
-.imgpick .fn{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;color:#fff;font-size:13px;line-height:18px;font-weight:500;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));display:flex;min-width:0;white-space:nowrap}
+.imgpick .fn{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 8px;color:#fff;font-size:13px;line-height:18px;font-weight:500;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));display:flex;min-width:0;white-space:nowrap}
 .imgpick .fn span{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .imgpick.none{border:1px dashed var(--a-strong);display:flex;align-items:center;justify-content:center;color:var(--a-link);font-weight:500}
 .imgpick:focus-visible{outline:2px solid var(--a-sel);outline-offset:2px}
-.collsel{display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:6px 10px;border:1px solid #8a8a8a;border-radius:10px;background:#fff;text-align:left}
+.collsel{display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:6px 12px;border:1px solid #8a8a8a;border-radius:10px;background:#fff;text-align:left}
 .collsel:hover{background:#fafafa}
 .collsel .v{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .collsel .v.ph{color:var(--a-text2)}
@@ -218,7 +222,7 @@ textarea.inp{min-height:80px;resize:vertical}
 /* popovers and modal */
 .pop{position:absolute;z-index:40;background:#fff;border-radius:12px;box-shadow:var(--a-shadow);padding:8px;width:300px;animation:pop .14s ease-out}
 @keyframes pop{from{opacity:0;transform:translateY(-4px)}}
-.pop .search{display:flex;align-items:center;gap:8px;min-height:32px;padding:0 10px;border:1px solid var(--a-strong);border-radius:8px}
+.pop .search{display:flex;align-items:center;gap:8px;min-height:32px;padding:0 12px;border:1px solid var(--a-strong);border-radius:8px}
 .pop .search input{flex:1;min-width:0;border:0;outline:0;background:none;font-size:13px}
 .pop .search.focus,.pop .search:focus-within{border-color:var(--a-sel);box-shadow:0 0 0 1px var(--a-sel)}
 .pop .grp{padding:8px 8px 4px;font-size:12px;font-weight:600;color:var(--a-text2)}
@@ -228,7 +232,7 @@ textarea.inp{min-height:80px;resize:vertical}
 .pop .opt .lbl{flex:1}
 .pop .opt.add{color:var(--a-link)}
 .pop .tabs{display:flex;gap:4px;padding:8px 0 4px}
-.pop .tabs button{padding:6px 10px;border-radius:8px;font-weight:600;color:var(--a-text2)}
+.pop .tabs button{padding:6px 12px;border-radius:8px;font-weight:600;color:var(--a-text2)}
 .pop .tabs button[aria-pressed="true"]{background:var(--a-subtle);color:var(--a-text)}
 .sec-opt{display:flex;gap:12px;align-items:center;width:100%;padding:8px;border-radius:8px;text-align:left}
 .sec-opt:hover,.sec-opt.hl{background:var(--a-subtle)}
@@ -251,7 +255,7 @@ textarea.inp{min-height:80px;resize:vertical}
 .copt .meta{flex:1;min-width:0}
 .copt .meta b{display:block;font-weight:600}
 .copt .meta span{color:var(--a-text2)}
-.toast{position:absolute;left:50%;bottom:28px;transform:translate(-50%,12px);opacity:0;z-index:60;background:#1a1a1a;color:#fff;border-radius:12px;padding:10px 16px;display:flex;gap:8px;align-items:center;font-weight:500;transition:opacity .2s,transform .2s;pointer-events:none;box-shadow:var(--a-shadow);white-space:nowrap}
+.toast{position:absolute;left:50%;bottom:28px;transform:translate(-50%,12px);opacity:0;z-index:60;background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;display:flex;gap:8px;align-items:center;font-weight:500;transition:opacity .2s,transform .2s;pointer-events:none;box-shadow:var(--a-shadow);white-space:nowrap}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- Stillwater storefront (preview) ----------
@@ -454,7 +458,7 @@ textarea.inp{min-height:80px;resize:vertical}
 .mtitle span{font-size:12px;line-height:16px;color:var(--a-text2)}
 .mtop .abtn{min-height:36px;padding:8px 16px;font-size:14px}
 .mpv{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:var(--paper);position:relative}
-.pill{position:absolute;left:50%;bottom:calc(20px + var(--hb,0px));transform:translateX(-50%);z-index:20;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#1a1a1a;color:#fff;font-weight:500;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.24)}
+.pill{position:absolute;left:50%;bottom:calc(20px + var(--hb,0px));transform:translateX(-50%);z-index:20;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:#1a1a1a;color:#fff;font-weight:500;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.24)}
 body.phone .med{--hb:14px}
 .sheet-scrim{position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.24);animation:fade .15s ease-out}
 .sheet-scrim.clear{background:transparent}
@@ -473,7 +477,7 @@ body.phone .med{--hb:14px}
 .sheet .pop-in{padding:0 16px 16px}
 .sheet .row{min-height:40px;font-size:14px}
 .sheet .pop .opt,.sheet .opt{min-height:40px;font-size:14px}
-.sheet .copt{padding:10px 8px}
+.sheet .copt{padding:12px 8px}
 .sheet-f{flex:none;padding:12px 16px 16px}
 .sheet-f .abtn{width:100%;min-height:44px;font-size:14px}
 .med .toast{bottom:calc(76px + var(--hb,0px))}
@@ -681,7 +685,7 @@ function sfHeader(){
     <nav><span>Shop</span><span>Build your bundle</span><span>Bestsellers</span><span>Journal</span></nav>
     <span class="hb">${ssvg("menu")}</span>
     <span class="logo">STILLWATER</span>
-    <div class="util"><span class="wide">Search</span><span class="wide">Account</span><span class="icon-only">${ssvg("search")}</span><span class="icon-only bag" aria-label="Cart, 0 items">${ssvg("bag")}</span></div>
+    <div class="util"><span class="wide">Search</span><span class="wide">Account</span><span class="icon-only">${ssvg("search")}</span><span class="icon-only bag" role="img" aria-label="Cart, 0 items">${ssvg("bag")}</span></div>
   </div>`;
 }
 function selDecor(kind, id, label){
