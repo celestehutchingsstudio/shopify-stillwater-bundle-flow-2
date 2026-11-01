@@ -9,4 +9,6 @@ Use the controls bar to switch between Desktop and iPhone, jump to any designed 
 
 What works: the page selector, Add section search, live editing of every setting (the preview updates as you type), Add Category, header image Change and Remove, the collection picker, reordering Category blocks (drag in the template tree, or Move up and Move down in the block's ⋯ menu), removing blocks, undo and redo, the desktop and mobile preview toggle, and Save. In the preview you can switch bundle sizes and add products to the bundle.
 
+The storefront in the preview matches the Flow 1 prototype: the same header with the bag icon, banners, product tiles with prices under the names, and the builder panel that opens on the larger bundle size and can be added to the cart from the smaller one.
+
 `assets/` holds the product photos and category banners from Flow 1. No real store, card or personal data is used.
