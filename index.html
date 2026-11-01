@@ -394,42 +394,57 @@ textarea.inp{min-height:80px;resize:vertical}
   .sf .hold{min-height:160px;font-size:13px}
 }
 
-/* ---------- Stillwater footer (shared by Flow 1 and Flow 2) ----------
-   Needs: --ink, --paper, --line, --muted, --display, --ui tokens, and an ancestor with container-name:app. */
-.sw-foot{background:var(--ink);color:#e9e3da;font-family:var(--ui);font-size:14px;line-height:20px;padding:72px 48px 28px;display:flex;flex-direction:column;gap:56px}
-.sw-foot a,.sw-foot button{color:inherit;font:inherit;background:none;border:0;padding:0;text-decoration:none;cursor:pointer}
-.sw-foot .ft-top{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:48px}
-.sw-foot .ft-news{display:flex;flex-direction:column;gap:14px;max-width:380px}
-.sw-foot .ft-news h2{font-family:var(--display);font-weight:500;font-size:30px;line-height:36px;margin:0;color:#fff}
-.sw-foot .ft-news p{margin:0;color:#b9b1a6}
-.sw-foot .ft-form{display:flex;border-bottom:1px solid #6f685f;margin-top:8px}
-.sw-foot .ft-form input{flex:1;min-width:0;background:none;border:0;color:#fff;font:inherit;padding:12px 0;outline:0}
-.sw-foot .ft-form input::placeholder{color:#8f877c}
-.sw-foot .ft-form button{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:12px 0 12px 16px;color:#fff}
-.sw-foot .ft-form:focus-within{border-bottom-color:#fff}
-.sw-foot .ft-col{display:flex;flex-direction:column;gap:12px;min-width:0}
-.sw-foot .ft-col h3{margin:0 0 4px;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#8f877c}
-.sw-foot .ft-col a:hover,.sw-foot .ft-bot a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
-.sw-foot .ft-mark{font-family:var(--display);font-weight:500;font-size:clamp(52px,10cqi,148px);line-height:.9;letter-spacing:.14em;color:#fff;margin:0;white-space:nowrap;overflow:hidden;text-align:center}
-.sw-foot .ft-bot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding-top:24px;border-top:1px solid #3a3733;font-size:12px;line-height:16px;color:#b9b1a6}
-.sw-foot .ft-bot .grp{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
-.sw-foot .ft-pay{display:flex;gap:6px;flex-wrap:wrap}
-.sw-foot .ft-pay span{border:1px solid #4a4640;border-radius:3px;padding:2px 6px;font-size:10px;line-height:14px;font-weight:600;letter-spacing:.04em;color:#d9d2c7}
-@container app (max-width:1100px){
-  .sw-foot{padding:56px 32px 24px}
-  .sw-foot .ft-top{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .sw-foot .ft-news{grid-column:1/-1;max-width:520px}
-}
+/* ---------- Stillwater store footer (copied from Flow 1, the single source) ---------- */
+.sf{--on-ink:#fff;--sab:0px}
+.sfoot button{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.sfoot{background:var(--ink);color:var(--on-ink);padding:64px 48px calc(32px + var(--sab));display:flex;flex-direction:column;gap:48px}
+.sfoot button{color:inherit}
+.sf-top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+.sf-news{display:flex;flex-direction:column;gap:12px;max-width:440px}
+.sf-h{font-family:var(--display);font-weight:500;font-size:28px;line-height:34px;margin:0}
+.sf-sub{margin:0;font-size:14px;line-height:22px;color:rgba(255,255,255,.66)}
+.sf-form{display:flex;margin-top:8px;border-bottom:1px solid rgba(255,255,255,.5)}
+.sf-form input{flex:1;min-width:0;background:transparent;border:0;color:var(--on-ink);font:inherit;font-size:14px;padding:12px 0;outline:none}
+.sf-form input::placeholder{color:rgba(255,255,255,.5)}
+.sf-form button{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:12px 0 12px 16px;min-height:44px}
+.sf-form:focus-within{border-color:var(--on-ink)}
+.sf-fine{margin:0;font-size:11px;line-height:16px;color:rgba(255,255,255,.5)}
+.sf-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.sf-col .sf-t{display:flex;justify-content:space-between;align-items:center;width:100%;font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.6);cursor:default;text-align:left}
+.sf-col .sf-t .ic{display:none}
+.sf-col ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.sf-col li button{font-size:14px;line-height:20px;text-align:left}
+.sf-col li button:hover,.sf-legal button:hover,.sf-social button:hover{text-decoration:underline;text-underline-offset:3px}
+.sf-mid{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,.18)}
+.sf-studio{font-size:13px;line-height:20px;color:rgba(255,255,255,.66);margin:0}
+.sf-studio b{display:block;color:var(--on-ink);font-weight:500;margin-bottom:2px}
+.sf-social{display:flex;gap:24px;font-size:13px}
+.sf-word{font-family:var(--display);font-weight:500;font-size:clamp(48px,11cqw,152px);line-height:.9;letter-spacing:.12em;text-align:center;margin:0;color:rgba(255,255,255,.92);white-space:nowrap;overflow:hidden}
+.sf-bot{display:flex;justify-content:space-between;align-items:center;gap:16px 32px;flex-wrap:wrap;font-size:12px;line-height:16px;color:rgba(255,255,255,.6)}
+.sf-bot .sf-left{display:flex;gap:16px 24px;align-items:center;flex-wrap:wrap}
+.sf-region{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.3);padding:8px 12px;min-height:36px;color:var(--on-ink)!important}
+.sf-region .ic{width:12px;height:12px}
+.sf-legal{display:flex;gap:16px;flex-wrap:wrap}
+.sf-legal button{font-size:12px}
+.sf-pay{display:flex;gap:6px;flex-wrap:wrap}
+.sf-pay span{border:1px solid rgba(255,255,255,.3);padding:3px 7px;font-size:10px;line-height:14px;font-weight:600;letter-spacing:.04em;color:var(--on-ink)}
+@container app (max-width:1100px){.sf-top{grid-template-columns:1fr;gap:48px}.sf-news{max-width:none}}
 @container app (max-width:900px){
-  .sw-foot{padding:48px 16px 24px;gap:40px}
-  .sw-foot .ft-top{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 16px}
-  .sw-foot .ft-news h2{font-size:26px;line-height:32px}
-  .sw-foot .ft-mark{font-size:52px;letter-spacing:.1em}
-  .sw-foot .ft-bot{flex-direction:column;align-items:flex-start}
+  .sfoot{padding:48px 20px calc(28px + var(--sab));gap:36px}
+  .sf-h{font-size:26px;line-height:32px}
+  .sf-cols{grid-template-columns:1fr;gap:0;border-top:1px solid rgba(255,255,255,.18)}
+  .sf-col{border-bottom:1px solid rgba(255,255,255,.18)}
+  .sf-col .sf-t{min-height:56px;cursor:pointer;color:var(--on-ink);font-size:12px}
+  .sf-col .sf-t .ic{display:block;transition:transform .2s}
+  .sf-col .sf-t[aria-expanded="true"] .ic{transform:rotate(45deg)}
+  .sf-col ul{display:none;margin:0;padding:0 0 20px}
+  .sf-col .sf-t[aria-expanded="true"]+ul{display:flex}
+  .sf-mid{border-top:0;padding-top:0;flex-direction:column;align-items:flex-start}
+  .sf-bot{flex-direction:column;align-items:flex-start}
 }
 
 /* ---------- mobile editor ---------- */
-.med .sw-foot{padding-bottom:96px}
+.med .sfoot{padding-bottom:96px}
 .med{flex:1;min-height:0;display:flex;flex-direction:column;background:#fff;position:relative;overflow:hidden}
 .mtop{flex:none;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:8px;min-height:60px;padding:6px 12px 6px 8px;background:#fff;border-bottom:1px solid var(--a-border)}
 .mtop .ib{width:40px;height:40px}
@@ -656,7 +671,8 @@ function tierLabel(size, reward){
 const SI = {
   plus:'<path d="M8 2v12M2 8h12"/>', close:'<path d="M3 3l10 10M13 3L3 13"/>', check:'<path d="M2.5 8.5l3.5 3.5 7.5-8"/>',
   menu:'<path d="M2 4h12M2 8h12M2 12h12"/>', search:'<circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/>',
-  bag:'<path d="M3 5h10l-1 9H4zM6 5V4a2 2 0 014 0v1"/>'
+  bag:'<path d="M3 5h10l-1 9H4zM6 5V4a2 2 0 014 0v1"/>',
+  down:'<path d="M4 6l4 4 4-4"/>'
 };
 const ssvg = (n, cls="ic") => `<svg class="${cls}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square" aria-hidden="true">${SI[n]}</svg>`;
 function sfHeader(){
@@ -735,27 +751,29 @@ function storefront(m){
     main = `<div class="main"><div class="bpage"><div class="products">${cats}</div><aside class="bside">${builder()}</aside></div></div>`;
   }
   const ins = (S.addOpen || (mobileUI && S.msheet==="add")) && !S.section ? `<div class="ins" aria-hidden="true"><span>${ic("plus","i16")}</span></div>` : "";
-  return `<div class="sf ${m?"m":""}" id="sf">${sfHeader()}${ins}${main}${swFooter()}</div>`;
+  return `<div class="sf ${m?"m":""}" id="sf">${sfHeader()}${ins}${main}${footer()}</div>`;
 }
 
-/* Stillwater footer markup (shared by Flow 1 and Flow 2). Links are placeholders; the sign-up form never sends anything. */
-function swFooter(){
-  const col = (h, items) => `<nav class="ft-col" aria-label="${h}"><h3>${h}</h3>${items.map(t=>`<a href="#" data-foot="${t}">${t}</a>`).join("")}</nav>`;
-  return `<footer class="sw-foot">
-    <div class="ft-top">
-      <div class="ft-news">
-        <h2>The Stillwater letter</h2>
-        <p>New scents, restocks and the occasional journal entry. Once a month, never more.</p>
-        <form class="ft-form" data-foot-form onsubmit="return false"><label class="sr" for="ft-email">Email address</label><input id="ft-email" type="email" placeholder="Email address" autocomplete="off"><button type="submit">Sign up</button></form>
-      </div>
-      ${col("Shop",["Fragrance","Skin and lip care","Accessories","Build your bundle","Gift cards"])}
-      ${col("Help",["Shipping and returns","Track an order","FAQ","Contact us"])}
-      ${col("Stillwater",["Our story","Journal","Stockists","Bare Earth partnership"])}
+/* Stillwater store footer, copied from Flow 1 so both prototypes match. Links go nowhere; the sign-up form never sends anything. */
+function footer(){
+  const cols=[["Shop",["Fragrance","Skin","Accessories","Build your bundle","Gift cards"]],["Help",["Shipping and returns","Track an order","FAQ","Contact us"]],["Stillwater",["Our story","The Toronto studio","Journal","Stockists","Careers"]]];
+  return `<footer class="sfoot">
+    <div class="sf-top">
+      <div class="sf-news"><h2 class="sf-h">Letters from the studio</h2>
+        <p class="sf-sub">New scents, notes from the studio and early access to small-batch runs. About once a month.</p>
+        <form class="sf-form" data-form="news" novalidate><label class="sr" for="sf-email">Email address</label><input id="sf-email" type="email" placeholder="Email address" autocomplete="off"><button type="submit">Subscribe</button></form>
+        <p class="sf-fine">By subscribing you agree to our Privacy Policy. Unsubscribe any time.</p></div>
+      <nav class="sf-cols" aria-label="Footer">${cols.map(([h,ls],i)=>`<div class="sf-col"><button type="button" class="sf-t" data-act="sf-toggle" aria-expanded="false" aria-controls="sf-l${i}">${h}${ssvg("plus")}</button><ul id="sf-l${i}">${ls.map(l=>`<li><button type="button" data-act="${l==="Build your bundle"?"nav-builder":"nav-soon"}" data-what="${l}">${l}</button></li>`).join("")}</ul></div>`).join("")}</nav>
     </div>
-    <p class="ft-mark" aria-hidden="true">STILLWATER</p>
-    <div class="ft-bot">
-      <div class="grp"><span>© 2026 Stillwater</span><a href="#" data-foot="Privacy policy">Privacy policy</a><a href="#" data-foot="Terms of service">Terms of service</a></div>
-      <div class="grp"><span>Canada (CAD $)</span><a href="#" data-foot="Instagram">Instagram</a><a href="#" data-foot="Pinterest">Pinterest</a><span class="ft-pay" aria-label="Payment methods"><span>VISA</span><span>MC</span><span>AMEX</span><span>Shop Pay</span><span>PayPal</span></span></div>
+    <div class="sf-mid">
+      <p class="sf-studio"><b>Studio and shop</b>1080 Queen St W, Toronto ON M6J 1H8<br>Wednesday to Sunday, 11 am to 6 pm</p>
+      <div class="sf-social">${["Instagram","Pinterest","TikTok"].map(n=>`<button type="button" data-act="nav-soon" data-what="${n}">${n}</button>`).join("")}</div>
+    </div>
+    <p class="sf-word" aria-hidden="true">STILLWATER</p>
+    <div class="sf-bot">
+      <div class="sf-left"><button type="button" class="sf-region" data-act="nav-soon" data-what="Country and currency">Canada (CAD $)${ssvg("down")}</button><span>© 2026 Stillwater Studio Inc.</span>
+        <div class="sf-legal">${["Privacy policy","Terms of service","Refund policy","Accessibility"].map(n=>`<button type="button" data-act="nav-soon" data-what="${n}">${n}</button>`).join("")}</div></div>
+      <div class="sf-pay" aria-label="Payment methods">${["VISA","Mastercard","AMEX","Apple Pay","Shop Pay","PayPal"].map(n=>`<span>${n}</span>`).join("")}</div>
     </div>
   </footer>`;
 }
@@ -1053,7 +1071,6 @@ function save(){
 
 document.addEventListener("click", e=>{
   if (!$("#app").contains(e.target)) return;
-  if (e.target.closest("a[data-foot]")) e.preventDefault();
   const b = e.target.closest("[data-act]");
   // click outside popovers closes them
   if (S.pageOpen && !e.target.closest("#pagepop") && !(b && b.dataset.act==="toggle-page")) { S.pageOpen=false; if(!b){ render(); return; } }
@@ -1098,9 +1115,16 @@ document.addEventListener("click", e=>{
     case "sf-tier": S.tier=+b.dataset.i; S.bag=S.bag.slice(0,[S.section.size1,S.section.size2][S.tier]); renderPreview(); break;
     case "sf-rm": S.bag=S.bag.filter(x=>x!==b.dataset.id); renderPreview(); break;
     case "sf-pick": { const c=S.cats.find(c=>c.coll); if(c) scrollPreviewTo(c.id); else toast("Add a Category block with a collection first"); break; }
+    case "sf-toggle": { const open=b.getAttribute("aria-expanded")==="true"; b.setAttribute("aria-expanded",String(!open)); break; }
+    case "nav-soon": toast(`${b.dataset.what} isn't part of this prototype`); break;
+    case "nav-builder": { const sc=previewScroller(); if(sc) sc.scrollTo({top:0,behavior:"smooth"}); break; }
     case "sf-add": { const id=b.dataset.id, n=[S.section.size1,S.section.size2][S.tier]; const i=S.bag.indexOf(id); if(i>=0) S.bag.splice(i,1); else if(S.bag.length<n) S.bag.push(id); else toast("Your bundle is full"); renderPreview(); break; }
     case "noop": case "sf-noop": break;
   }
+});
+document.addEventListener("submit", e=>{
+  const f=e.target.closest("form[data-form]"); if(!f) return; e.preventDefault();
+  if (f.dataset.form==="news"){ const inp=f.querySelector("input"), v=inp.value.trim(); if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ toast("Enter an email address to subscribe."); return; } inp.value=""; toast("Thanks for subscribing. This is a prototype, so no email was sent."); }
 });
 document.addEventListener("input", e=>{
   const t=e.target;
