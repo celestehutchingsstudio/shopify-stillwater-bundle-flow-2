@@ -371,7 +371,6 @@ textarea.inp{min-height:80px;resize:vertical}
 .sf .summary .msg{font-size:12px;line-height:20px;color:var(--muted)}
 .sf .summary .msg.ok{color:#3f5a45}
 .sf .builder .link{align-self:center}
-.sf .foot{background:var(--ink);height:120px}
 @container app (max-width:1180px){
   .sf .bpage{grid-template-columns:minmax(0,1fr) 400px;gap:32px;padding:0 32px}
   .sf .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -393,10 +392,44 @@ textarea.inp{min-height:80px;resize:vertical}
   .sf .banner h2{font-size:30px;line-height:36px}
   .sf .banner p{font-size:14px;line-height:20px}
   .sf .hold{min-height:160px;font-size:13px}
-  .sf .foot{height:80px}
+}
+
+/* ---------- Stillwater footer (shared by Flow 1 and Flow 2) ----------
+   Needs: --ink, --paper, --line, --muted, --display, --ui tokens, and an ancestor with container-name:app. */
+.sw-foot{background:var(--ink);color:#e9e3da;font-family:var(--ui);font-size:14px;line-height:20px;padding:72px 48px 28px;display:flex;flex-direction:column;gap:56px}
+.sw-foot a,.sw-foot button{color:inherit;font:inherit;background:none;border:0;padding:0;text-decoration:none;cursor:pointer}
+.sw-foot .ft-top{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:48px}
+.sw-foot .ft-news{display:flex;flex-direction:column;gap:14px;max-width:380px}
+.sw-foot .ft-news h2{font-family:var(--display);font-weight:500;font-size:30px;line-height:36px;margin:0;color:#fff}
+.sw-foot .ft-news p{margin:0;color:#b9b1a6}
+.sw-foot .ft-form{display:flex;border-bottom:1px solid #6f685f;margin-top:8px}
+.sw-foot .ft-form input{flex:1;min-width:0;background:none;border:0;color:#fff;font:inherit;padding:12px 0;outline:0}
+.sw-foot .ft-form input::placeholder{color:#8f877c}
+.sw-foot .ft-form button{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:12px 0 12px 16px;color:#fff}
+.sw-foot .ft-form:focus-within{border-bottom-color:#fff}
+.sw-foot .ft-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sw-foot .ft-col h3{margin:0 0 4px;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#8f877c}
+.sw-foot .ft-col a:hover,.sw-foot .ft-bot a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.sw-foot .ft-mark{font-family:var(--display);font-weight:500;font-size:clamp(52px,10cqi,148px);line-height:.9;letter-spacing:.14em;color:#fff;margin:0;white-space:nowrap;overflow:hidden;text-align:center}
+.sw-foot .ft-bot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding-top:24px;border-top:1px solid #3a3733;font-size:12px;line-height:16px;color:#b9b1a6}
+.sw-foot .ft-bot .grp{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.sw-foot .ft-pay{display:flex;gap:6px;flex-wrap:wrap}
+.sw-foot .ft-pay span{border:1px solid #4a4640;border-radius:3px;padding:2px 6px;font-size:10px;line-height:14px;font-weight:600;letter-spacing:.04em;color:#d9d2c7}
+@container app (max-width:1100px){
+  .sw-foot{padding:56px 32px 24px}
+  .sw-foot .ft-top{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sw-foot .ft-news{grid-column:1/-1;max-width:520px}
+}
+@container app (max-width:900px){
+  .sw-foot{padding:48px 16px 24px;gap:40px}
+  .sw-foot .ft-top{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 16px}
+  .sw-foot .ft-news h2{font-size:26px;line-height:32px}
+  .sw-foot .ft-mark{font-size:52px;letter-spacing:.1em}
+  .sw-foot .ft-bot{flex-direction:column;align-items:flex-start}
 }
 
 /* ---------- mobile editor ---------- */
+.med .sw-foot{padding-bottom:96px}
 .med{flex:1;min-height:0;display:flex;flex-direction:column;background:#fff;position:relative;overflow:hidden}
 .mtop{flex:none;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:8px;min-height:60px;padding:6px 12px 6px 8px;background:#fff;border-bottom:1px solid var(--a-border)}
 .mtop .ib{width:40px;height:40px}
@@ -428,8 +461,7 @@ body.phone .med{--hb:14px}
 .sheet .copt{padding:10px 8px}
 .sheet-f{flex:none;padding:12px 16px 16px}
 .sheet-f .abtn{width:100%;min-height:44px;font-size:14px}
-.med .toast{bottom:auto;top:72px;transform:translate(-50%,-8px)}
-.med .toast.show{transform:translate(-50%,0)}
+.med .toast{bottom:calc(76px + var(--hb,0px))}
 .med .menu{top:48px}
 .mlive{padding:4px 16px 20px}
 .mlive .h{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
@@ -601,7 +633,7 @@ function preset(n){
   if (n===8){ S.sel="section"; }
   if (n===9){ S.sel=null; S.dirty=false; S.live=true; }
   // the phone editor opens the matching sheet
-  S.msheet = ({1:"templates",2:"add",3:"settings",4:"settings",5:"picker",6:"tree",8:"tree",9:"live"})[n] || null;
+  S.msheet = ({1:"templates",2:"add",3:"settings",4:"settings",5:"picker",6:"tree",8:"tree"})[n] || null;
   render();
   if (n===6) scrollPreviewTo(S.cats[1].id);
   if (n===8) { const sc=previewScroller(); if(sc) sc.scrollTop=0; }
@@ -703,7 +735,29 @@ function storefront(m){
     main = `<div class="main"><div class="bpage"><div class="products">${cats}</div><aside class="bside">${builder()}</aside></div></div>`;
   }
   const ins = (S.addOpen || (mobileUI && S.msheet==="add")) && !S.section ? `<div class="ins" aria-hidden="true"><span>${ic("plus","i16")}</span></div>` : "";
-  return `<div class="sf ${m?"m":""}" id="sf">${sfHeader()}${ins}${main}<div class="foot"></div></div>`;
+  return `<div class="sf ${m?"m":""}" id="sf">${sfHeader()}${ins}${main}${swFooter()}</div>`;
+}
+
+/* Stillwater footer markup (shared by Flow 1 and Flow 2). Links are placeholders; the sign-up form never sends anything. */
+function swFooter(){
+  const col = (h, items) => `<nav class="ft-col" aria-label="${h}"><h3>${h}</h3>${items.map(t=>`<a href="#" data-foot="${t}">${t}</a>`).join("")}</nav>`;
+  return `<footer class="sw-foot">
+    <div class="ft-top">
+      <div class="ft-news">
+        <h2>The Stillwater letter</h2>
+        <p>New scents, restocks and the occasional journal entry. Once a month, never more.</p>
+        <form class="ft-form" data-foot-form onsubmit="return false"><label class="sr" for="ft-email">Email address</label><input id="ft-email" type="email" placeholder="Email address" autocomplete="off"><button type="submit">Sign up</button></form>
+      </div>
+      ${col("Shop",["Fragrance","Skin and lip care","Accessories","Build your bundle","Gift cards"])}
+      ${col("Help",["Shipping and returns","Track an order","FAQ","Contact us"])}
+      ${col("Stillwater",["Our story","Journal","Stockists","Bare Earth partnership"])}
+    </div>
+    <p class="ft-mark" aria-hidden="true">STILLWATER</p>
+    <div class="ft-bot">
+      <div class="grp"><span>© 2026 Stillwater</span><a href="#" data-foot="Privacy policy">Privacy policy</a><a href="#" data-foot="Terms of service">Terms of service</a></div>
+      <div class="grp"><span>Canada (CAD $)</span><a href="#" data-foot="Instagram">Instagram</a><a href="#" data-foot="Pinterest">Pinterest</a><span class="ft-pay" aria-label="Payment methods"><span>VISA</span><span>MC</span><span>AMEX</span><span>Shop Pay</span><span>PayPal</span></span></div>
+    </div>
+  </footer>`;
 }
 
 /* ---------- template tree ---------- */
@@ -856,7 +910,6 @@ function desktop(){
     </div>
     <div class="body">
       <aside class="side" id="side" aria-label="Template">
-        ${S.live?liveCard():""}
         <div class="card tree" id="tree"><div class="ttl">build-your-bundle</div><hr>${treeRows(false)}</div>
         ${S.sel?`<div class="card" id="settings">${settings(false)}</div>`:""}
         <div class="card tree foot-card">${footerRows()}</div>
@@ -993,13 +1046,14 @@ function closePicker(){ S.picker=null; if(mobileUI) S.msheet="settings"; render(
 function save(){
   if(!S.dirty) return;
   S.dirty=false; S.live=true; S.menu=false; S.addOpen=false; S.pageOpen=false;
-  if (mobileUI) { S.msheet="live"; }
+  if (mobileUI) { S.msheet=null; S.sel=null; }
   else S.sel=null;
   render(); toast("Saved");
 }
 
 document.addEventListener("click", e=>{
   if (!$("#app").contains(e.target)) return;
+  if (e.target.closest("a[data-foot]")) e.preventDefault();
   const b = e.target.closest("[data-act]");
   // click outside popovers closes them
   if (S.pageOpen && !e.target.closest("#pagepop") && !(b && b.dataset.act==="toggle-page")) { S.pageOpen=false; if(!b){ render(); return; } }
